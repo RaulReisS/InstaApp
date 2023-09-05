@@ -1,18 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintVertical_bias="0.3"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     tools:context=".login.view.LoginActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/imgLoginLogo"
+        android:layout_marginBottom="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:contentDescription="@null"
+        android:src="@drawable/instaapp_logo_black" />
+    
+    <EditText
+        android:id="@+id/edtLoginEmail"
+        android:hint="@string/email"
+        android:autofillHints="@null"
+        android:inputType="textEmailAddress"
+        style="@style/Theme.InstaApp.FormEditText" />
+
+    <EditText
+        android:id="@+id/edtLoginPassword"
+        android:hint="@string/password"
+        android:autofillHints="@null"
+        android:inputType="textPassword"
+        style="@style/Theme.InstaApp.FormEditText" />
+    
+    <Button
+        style="@style/Theme.InstaApp.Button"
+        android:text="@string/enter"
+        android:id="@+id/btnLoginEnter" />
+
+    <FrameLayout
+        style="@style/Theme.InstaApp.FormContainer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content">
+        
+        <View
+            android:layout_gravity="center"
+            android:background="@color/gray_darker"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        
+        <TextView
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:text="@string/or"
+            android:padding="8dp"
+            style="@style/Theme.InstaApp.TextViewBase"/>
+    </FrameLayout>
+</LinearLayout>
+    
+    <View
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintBottom_toTopOf="@id/txvLoginRegister"
+        android:background="@color/gray_darker"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    
+    <TextView
+        android:text="@string/does_not_have_account"
+        android:id="@+id/txvLoginRegister"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="24dp"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/Theme.InstaApp.TextViewBase" />
 </androidx.constraintlayout.widget.ConstraintLayout>
