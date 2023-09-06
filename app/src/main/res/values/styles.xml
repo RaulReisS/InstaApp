@@ -6,11 +6,11 @@
         <item name="android:layout_marginEnd">36dp</item>
     </style>
 
-    <style name="Theme.InstaApp.FormEditText" parent="Theme.InstaApp.FormContainer">
+    <style name="Theme.InstaApp.FormEditText" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
-        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
         <item name="android:background">@drawable/edit_text_background</item>
     </style>
     
@@ -30,5 +30,13 @@
         <item name="android:textColor">@color/gray_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Theme.InstaApp.FormEditTextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">36dp</item>
+        <item name="android:layout_marginEnd">36dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
     </style>
 </resources>

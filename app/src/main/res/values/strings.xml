@@ -5,4 +5,41 @@
     <string name="enter">Enter</string>
     <string name="or">OR</string>
     <string name="does_not_have_account">Does not have a account? <b><font color="#000000">Register now!</font></b></string>
+    <string name="already_has_account">Already have a account? <b><font color="#000000">login now.</font></b></string>
+    <string name="title_activity_register" translatable="false">RegisterActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="next">Next</string>
+    <string name="name">Name</string>
+    <string name="password_confirm">Confirm password</string>
+    <string name="continuee">Continue</string>
+    <string name="agree_terms_policy">If you click on next, you will agree with our <b>Data and Cookies politics terms</b></string>
+    <string name="welcome_to_instaapp"><b>WELCOME TO INSTAAPP,\n%1$s</b>\nFind people to follow and start sharing your pictures. You can change your username any time</string>
+    <string name="photo_register_subtitle">Add a profile pictor to your friends know who you are</string>
+    <string name="photo_register_title">Add a profile picture</string>
+    <string name="take_picture">Take a picture</string>
+    <string name="search_gallery">Choose from gallery</string>
+    <string name="define_photo_profile">Define a profile picture</string>
+    <string name="skip">Skip</string>
+    <string name="add_photo">Add photo</string>
+    <string name="home">Home</string>
+    <string name="posts">Posts</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="username">username</string>
+    <string name="invalid_email">Invalid e-mail</string>
+    <string name="password_not_equal">The two passwords must be iqual.</string>
+    <string name="save">Save</string>
+    <string name="title_activity_add" translatable="false">AddActivity</string>
+    <string name="photo">Photo</string>
+    <string name="gallery">Gallery</string>
+    <string name="write_caption">Write a caption…</string>
+    <string name="share">Share</string>
+    <string name="go">Forward</string>
+    <string name="search">Search</string>
+    <string name="unfollow">Following</string>
+    <string name="follow">Follow</string>
+    <string name="logout">Do you wish to logout?</string>
+    <string name="logout_action">Logout</string>
+    <string name="cancel">Cancel</string>
 </resources>

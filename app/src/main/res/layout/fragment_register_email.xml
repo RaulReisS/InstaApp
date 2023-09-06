@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingBottom="70dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_marginBottom="48dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@null"
+                android:src="@drawable/photo_icon" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtRegisterEmailInput"
+                app:hintEnabled="false"
+                style="@style/Theme.InstaApp.FormEditTextInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtRegisterEmail"
+                    android:hint="@string/email"
+                    android:autofillHints="@null"
+                    android:inputType="textEmailAddress"
+                    style="@style/Theme.InstaApp.FormEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <br.com.raulreis.instaapp.login.view.LoadingButton
+                app:text="@string/next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnRegisterNext" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/txvRegisterLogin"
+        android:background="@color/gray_darker"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <TextView
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/white"
+        android:text="@string/already_has_account"
+        android:id="@+id/txvRegisterLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="24dp"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/Theme.InstaApp.TextViewBase" />
+</androidx.constraintlayout.widget.ConstraintLayout>

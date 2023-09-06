@@ -29,24 +29,36 @@
         android:layout_height="60dp"
         android:contentDescription="@null"
         android:src="@drawable/instaapp_logo_black" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtLoginEmailInput"
+        app:hintEnabled="false"
+        style="@style/Theme.InstaApp.FormEditTextInput">
     
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edtLoginEmail"
         android:hint="@string/email"
         android:autofillHints="@null"
         android:inputType="textEmailAddress"
         style="@style/Theme.InstaApp.FormEditText" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtLoginPasswordInput"
+        app:hintEnabled="false"
+        style="@style/Theme.InstaApp.FormEditTextInput">
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edtLoginPassword"
         android:hint="@string/password"
         android:autofillHints="@null"
         android:inputType="textPassword"
         style="@style/Theme.InstaApp.FormEditText" />
+    </com.google.android.material.textfield.TextInputLayout>
     
-    <Button
-        style="@style/Theme.InstaApp.Button"
-        android:text="@string/enter"
+    <br.com.raulreis.instaapp.login.view.LoadingButton
+        app:text="@string/enter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/btnLoginEnter" />
 
     <FrameLayout
