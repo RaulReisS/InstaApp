@@ -12,7 +12,7 @@
     <string name="name">Name</string>
     <string name="password_confirm">Confirm password</string>
     <string name="continuee">Continue</string>
-    <string name="agree_terms_policy">If you click on next, you will agree with our <b>Data and Cookies politics terms</b></string>
+    <string name="agree_terms_policy">If you click on next, you will agree with our <b>Data and Cookies policy terms</b></string>
     <string name="welcome_to_instaapp"><b>WELCOME TO INSTAAPP,\n%1$s</b>\nFind people to follow and start sharing your pictures. You can change your username any time</string>
     <string name="photo_register_subtitle">Add a profile pictor to your friends know who you are</string>
     <string name="photo_register_title">Add a profile picture</string>

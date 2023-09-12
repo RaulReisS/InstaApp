@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:paddingBottom="70dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_marginBottom="48dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@null"
+                android:src="@drawable/photo_icon" />
+
+            <TextView
+                android:text="@string/photo_register_title"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                style="@style/Theme.InstaApp.TextViewBase.Form" />
+
+            <TextView
+                android:text="@string/photo_register_subtitle"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                style="@style/Theme.InstaApp.TextViewBase.Form" />
+
+            <br.com.raulreis.instaapp.login.view.LoadingButton
+                app:text="@string/add_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnRegisterPhotoNext" />
+
+            <Button
+                android:id="@+id/btnRegisterSkip"
+                android:text="@string/skip"
+                style="@style/Theme.InstaApp.Link"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

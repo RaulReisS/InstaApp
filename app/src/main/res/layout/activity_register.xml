@@ -9,8 +9,8 @@
     
     <fragment
         android:id="@+id/fragmentRegister"
-        tools:layout="@layout/fragment_register_email"
-        android:name="br.com.raulreis.instaapp.register.view.RegisterEmailFragment"
+        tools:layout="@layout/fragment_register_photo"
+        android:name="br.com.raulreis.instaapp.register.view.RegisterPhotoFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

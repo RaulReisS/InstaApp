@@ -39,4 +39,15 @@
         <item name="android:layout_marginEnd">36dp</item>
         <item name="android:layout_marginBottom">20dp</item>
     </style>
+    
+    <style name="Theme.InstaApp.TextViewBase.Form">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginBottom">24dp</item>
+    </style>
+
+    <style name="Theme.InstaApp.Link" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/blue_enabled</item>
+    </style>
 </resources>
