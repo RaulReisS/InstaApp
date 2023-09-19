@@ -1,4 +1,4 @@
-package br.com.raulreis.instaapp.home.view
+package br.com.raulreis.instaapp.search.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.raulreis.instaapp.R
 
-class FragmentHome : Fragment() {
+class FragmentSearch : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
