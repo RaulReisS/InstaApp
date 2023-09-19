@@ -1,4 +1,4 @@
-package br.com.raulreis.instaapp.profile.view
+package br.com.raulreis.instaapp.home.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.raulreis.instaapp.R
 
-class FragmentProfile : Fragment() {
+class FragmentHome : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
