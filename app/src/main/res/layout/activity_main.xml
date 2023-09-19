@@ -37,8 +37,8 @@
     <fragment
         android:id="@+id/fragmentMain"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:layout="@layout/fragment_home"
-        android:name="br.com.raulreis.instaapp.home.view.FragmentHome"
+        tools:layout="@layout/fragment_search"
+        android:name="br.com.raulreis.instaapp.search.view.FragmentSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@id/bottomnavMain"

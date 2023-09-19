@@ -1,4 +1,4 @@
-package br.com.raulreis.instaapp.search.view
+package br.com.raulreis.instaapp.camera.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.raulreis.instaapp.R
 
-class FragmentSearch : Fragment() {
+class FragmentCamera : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val rv = view.findViewById<RecyclerView>(R.id.rvSearch)
+        val rv = view.findViewById<RecyclerView>(R.id.rvHome)
         rv.layoutManager = LinearLayoutManager(requireContext())
         rv.adapter = PostAdapter()
     }
@@ -43,7 +43,7 @@ class FragmentSearch : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
             return PostViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_user_list, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_post_list, parent, false)
             )
         }
 
@@ -57,7 +57,7 @@ class FragmentSearch : Fragment() {
 
         private class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             fun bind(image: Int) {
-                itemView.findViewById<ImageView>(R.id.imgSearchUser).setImageResource(image)
+                itemView.findViewById<ImageView>(R.id.imgHomePost).setImageResource(image)
             }
         }
     }
