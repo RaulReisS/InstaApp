@@ -5,6 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.view.MainActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomnavMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/white"
+        android:layout_height="wrap_content" >
+
+        <androidx.appcompat.widget.Toolbar
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <fragment
+        android:id="@+id/fragmentMain"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout="@layout/fragment_profile"
+        android:name="br.com.raulreis.instaapp.profile.view.FragmentProfile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomnavMain"
+
+        />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
     
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:padding="0dp"
