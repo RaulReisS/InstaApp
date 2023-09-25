@@ -28,6 +28,7 @@
     <string name="edit_profile">Edit profile</string>
     <string name="username">username</string>
     <string name="invalid_email">Invalid e-mail</string>
+    <string name="invalid_password">Password must have at least 8 characters</string>
     <string name="password_not_equal">The two passwords must be iqual.</string>
     <string name="save">Save</string>
     <string name="title_activity_add" translatable="false">AddActivity</string>
