@@ -1,4 +1,5 @@
 package br.com.raulreis.instaapp.login.data
 
-class LoginDataSource {
+interface LoginDataSource {
+    fun login(email: String, password: String, callback: LoginCallback)
 }

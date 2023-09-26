@@ -1,5 +1,6 @@
 package br.com.raulreis.instaapp.login
 
+import androidx.annotation.StringRes
 import br.com.raulreis.instaapp.common.base.BasePresenter
 import br.com.raulreis.instaapp.common.base.BaseView
 
@@ -14,8 +15,8 @@ interface Login {
     interface View : BaseView<Presenter> {
         fun showProgress(enabled: Boolean)
 
-        fun displayEmailFailure(emailError: Int?)
-        fun displayPasswordFailure(passwordError: Int?)
+        fun displayEmailFailure(@StringRes emailError: Int?)
+        fun displayPasswordFailure(@StringRes passwordError: Int?)
         fun onUserAuthenticated()
         fun onUserUnauthorized(message: String)
 

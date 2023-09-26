@@ -4,12 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
+import br.com.raulreis.instaapp.common.base.DependencyInjector
 import br.com.raulreis.instaapp.common.util.TxtWatcher
 import br.com.raulreis.instaapp.databinding.ActivityLoginBinding
 import br.com.raulreis.instaapp.login.Login
 import br.com.raulreis.instaapp.login.presentation.LoginPresenter
 import br.com.raulreis.instaapp.main.view.MainActivity
+import br.com.raulreis.instaapp.register.view.RegisterActivity
 
 class LoginActivity : AppCompatActivity(), Login.View {
 
@@ -23,7 +24,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
         setContentView(binding.root)
 
-        presenter = LoginPresenter(this)
+        presenter = LoginPresenter(this, DependencyInjector.loginRepository())
 
         with(binding) {
             edtLoginEmail.addTextChangedListener(watcher)
@@ -38,6 +39,9 @@ class LoginActivity : AppCompatActivity(), Login.View {
             btnLoginEnter.setOnClickListener {
                 presenter.login(edtLoginEmail.text.toString(), edtLoginPassword.text.toString())
             }
+            txvLoginRegister.setOnClickListener {
+                goToRegisterActivity()
+            }
         }
     }
 
@@ -49,6 +53,10 @@ class LoginActivity : AppCompatActivity(), Login.View {
     private val watcher = TxtWatcher {
         binding.btnLoginEnter.isEnabled = binding.edtLoginEmail.text.toString().isNotEmpty()
                 && binding.edtLoginPassword.text.toString().isNotEmpty()
+    }
+
+    private fun goToRegisterActivity() {
+       startActivity(Intent(this, RegisterActivity::class.java))
     }
 
     override fun showProgress(enabled: Boolean) {
@@ -65,6 +73,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
     override fun onUserAuthenticated() {
         val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
     }
 
