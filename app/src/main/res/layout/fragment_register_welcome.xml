@@ -24,12 +24,13 @@
             android:background="@color/white">
             
             <TextView
+                android:id="@+id/txvWelcome"
                 android:text="@string/welcome_to_instaapp"
                 style="@style/Theme.InstaApp.TextViewBase.Form"/>
 
 
 
-            <br.com.raulreis.instaapp.login.view.LoadingButton
+            <br.com.raulreis.instaapp.common.view.LoadingButton
                 app:text="@string/next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

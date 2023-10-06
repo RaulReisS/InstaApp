@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:background="@color/white">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgRegisterProfile"
                 android:layout_marginBottom="48dp"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
@@ -44,7 +45,7 @@
                 android:layout_gravity="center_horizontal"
                 style="@style/Theme.InstaApp.TextViewBase.Form" />
 
-            <br.com.raulreis.instaapp.login.view.LoadingButton
+            <br.com.raulreis.instaapp.common.view.LoadingButton
                 app:text="@string/add_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

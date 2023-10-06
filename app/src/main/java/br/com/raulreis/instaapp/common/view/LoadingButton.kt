@@ -1,4 +1,4 @@
-package br.com.raulreis.instaapp.login.view
+package br.com.raulreis.instaapp.common.view
 
 import android.content.Context
 import android.util.AttributeSet
