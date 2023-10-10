@@ -1,8 +1,10 @@
 package br.com.raulreis.instaapp.register.data
 
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import br.com.raulreis.instaapp.common.model.Database
+import br.com.raulreis.instaapp.common.model.Photo
 import br.com.raulreis.instaapp.common.model.UserAuth
 import java.util.UUID
 
@@ -49,4 +51,29 @@ class FakeRegisterDataSource: RegisterDataSource {
         }, 2000)
     }
 
+    override fun updateUser(photoUri: Uri, callback: RegisterCallback) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            val userAuth = Database.sessionAuth
+
+            if (userAuth == null) {
+                callback.onFailure("Usuário não encontrado")
+            }
+            else {
+
+                val newPhoto = Photo(userAuth.uuid, photoUri)
+
+                val created = Database.photos.add(newPhoto)
+
+                if (created) {
+                    callback.onSuccess()
+                }
+                else {
+                    callback.onFailure("Erro interno no servidor")
+                }
+
+            }
+
+            callback.onComplete()
+        }, 2000)
+    }
 }

@@ -3,8 +3,8 @@
     <string name="password">Senha</string>
     <string name="enter">Entrar</string>
     <string name="or">OU</string>
-    <string name="does_not_have_account">Não tem uma conta? <b><font color="#000000">Registre-se!</font></b></string>
-    <string name="already_has_account">Já tem uma conta? <b><font color="#000000">Faça login.</font></b></string>
+    <string name="does_not_have_account">Não tem uma conta? <b>Registre-se!</b></string>
+    <string name="already_has_account">Já tem uma conta? <b>Faça login.</b></string>
     <string name="action_settings">Configurações</string>
     <string name="next">Avançar</string>
     <string name="name">Nome</string>

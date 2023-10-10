@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import br.com.raulreis.instaapp.R
+import br.com.raulreis.instaapp.common.extension.hideKeyboard
 import br.com.raulreis.instaapp.common.view.CropperImageFragment
 import br.com.raulreis.instaapp.common.view.CropperImageFragment.Companion.KEY_URI
 import br.com.raulreis.instaapp.databinding.ActivityRegisterBinding
@@ -137,6 +138,7 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
                 commit()
             }
         }
+        hideKeyboard()
     }
 
     private fun openImageCropper(uri: Uri) {
