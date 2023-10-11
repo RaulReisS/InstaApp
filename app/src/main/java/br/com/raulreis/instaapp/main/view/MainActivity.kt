@@ -3,17 +3,37 @@ package br.com.raulreis.instaapp.main.view
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.WindowInsetsController
 import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import br.com.raulreis.instaapp.R
+import br.com.raulreis.instaapp.camera.view.CameraFragment
+import br.com.raulreis.instaapp.common.extension.replaceFragment
+import br.com.raulreis.instaapp.databinding.ActivityMainBinding
+import br.com.raulreis.instaapp.home.view.HomeFragment
+import br.com.raulreis.instaapp.profile.view.ProfileFragment
+import br.com.raulreis.instaapp.search.view.SearchFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var binding : ActivityMainBinding
+
+    private lateinit var homeFragment: Fragment
+    private lateinit var searchFragment: Fragment
+    private lateinit var cameraFragment: Fragment
+    private lateinit var profileFragment: Fragment
+    private var currentFragment: Fragment? = null
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -24,11 +44,48 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbarMain)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbarMain)
 
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_insta_camera)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
+
+        homeFragment = HomeFragment()
+        searchFragment = SearchFragment()
+        cameraFragment = CameraFragment()
+        profileFragment = ProfileFragment()
+
+        binding.bottomnavMain.setOnNavigationItemSelectedListener(this)
+        binding.bottomnavMain.selectedItemId = R.id.menu_bottom_home
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_bottom_home -> {
+                if (currentFragment == homeFragment)
+                    return false
+                currentFragment = homeFragment
+            }
+            R.id.menu_bottom_search -> {
+                if (currentFragment == searchFragment)
+                    return false
+                currentFragment = searchFragment
+            }
+            R.id.menu_bottom_add -> {
+                if (currentFragment == cameraFragment)
+                    return false
+                currentFragment = cameraFragment
+            }
+            R.id.menu_bottom_profile -> {
+                if (currentFragment == profileFragment)
+                    return false
+                currentFragment = profileFragment
+            }
+        }
+
+        currentFragment?.let {
+            replaceFragment(R.id.fragmentMain, it)
+        }
+        return true
     }
 }
