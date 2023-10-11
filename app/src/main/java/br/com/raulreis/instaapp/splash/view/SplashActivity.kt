@@ -49,15 +49,21 @@ class SplashActivity : AppCompatActivity(), Splash.View {
             alpha(0.0f)
             start()
         }
-
-
     }
 
 
     override fun goToLoginScreen() {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        binding.imgSplash.animate().apply {
+            setListener(animationEnd {
+                val intent = Intent(baseContext, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            })
+            duration = 1000
+            startDelay = 1000
+            alpha(0.0f)
+            start()
+        }
     }
 }
