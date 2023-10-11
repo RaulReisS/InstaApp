@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowInsetsController
 import androidx.annotation.RequiresApi
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import br.com.raulreis.instaapp.R
@@ -15,6 +16,7 @@ import br.com.raulreis.instaapp.databinding.ActivityMainBinding
 import br.com.raulreis.instaapp.home.view.HomeFragment
 import br.com.raulreis.instaapp.profile.view.ProfileFragment
 import br.com.raulreis.instaapp.search.view.SearchFragment
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -60,6 +62,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        var scrollToolbarEnabled = false
         when(item.itemId) {
             R.id.menu_bottom_home -> {
                 if (currentFragment == homeFragment)
@@ -80,12 +83,30 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 if (currentFragment == profileFragment)
                     return false
                 currentFragment = profileFragment
+                scrollToolbarEnabled = true
             }
         }
+        setScrollToolbarEnaled(scrollToolbarEnabled)
 
         currentFragment?.let {
             replaceFragment(R.id.fragmentMain, it)
         }
         return true
     }
+
+    private fun setScrollToolbarEnaled(enabled: Boolean) {
+        val params = binding.toolbarMain.layoutParams as AppBarLayout.LayoutParams
+        val coordinatParams = binding.appbarMain.layoutParams as CoordinatorLayout.LayoutParams
+
+        if (enabled) {
+            params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+            coordinatParams.behavior = AppBarLayout.Behavior()
+            binding.appbarMain.layoutParams = coordinatParams
+        } else {
+            params.scrollFlags = 0
+            coordinatParams.behavior = null
+            binding.appbarMain.layoutParams = coordinatParams
+        }
+    }
+
 }
