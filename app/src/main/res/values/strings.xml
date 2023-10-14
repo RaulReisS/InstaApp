@@ -44,4 +44,5 @@
     <string name="logout">Do you wish to logout?</string>
     <string name="logout_action">Logout</string>
     <string name="cancel">Cancel</string>
+    <string name="empty_list">No posts found</string>
 </resources>

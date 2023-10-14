@@ -1,37 +1,35 @@
 package br.com.raulreis.instaapp.home.view
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.raulreis.instaapp.R
+import br.com.raulreis.instaapp.common.base.BaseFragment
+import br.com.raulreis.instaapp.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding, Home.Presenter>(
+    R.layout.fragment_home,
+    FragmentHomeBinding::bind
+) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    override lateinit var presenter: Home.Presenter
+
+    override fun setupViews() {
+        binding?.rvHome?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.rvHome?.adapter = PostAdapter()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val rv = view.findViewById<RecyclerView>(R.id.rvHome)
-        rv.layoutManager = LinearLayoutManager(requireContext())
-        rv.adapter = PostAdapter()
+    override fun setupPresenter() {
+
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+    override fun getMenu(): Int? {
+        return R.menu.menu_home
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

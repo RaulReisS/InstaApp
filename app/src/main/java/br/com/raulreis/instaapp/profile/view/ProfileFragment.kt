@@ -1,64 +1,65 @@
 package br.com.raulreis.instaapp.profile.view
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import br.com.raulreis.instaapp.R
+import br.com.raulreis.instaapp.common.base.BaseFragment
+import br.com.raulreis.instaapp.common.model.Post
+import br.com.raulreis.instaapp.common.model.UserAuth
+import br.com.raulreis.instaapp.databinding.FragmentProfileBinding
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
+    R.layout.fragment_profile,
+    FragmentProfileBinding::bind
+), Profile.View {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    override lateinit var presenter: Profile.Presenter
+
+    private val adapter = PostAdapter()
+
+    override fun setupPresenter() {
+        // TODO: presenter = ProfilePresenter(this, repository)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val rv = view.findViewById<RecyclerView>(R.id.rvProfile)
-        rv.layoutManager = GridLayoutManager(requireContext(), 3)
-        rv.adapter = PostAdapter()
+    override fun setupViews() {
+        binding?.rvProfile?.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding?.rvProfile?.adapter = adapter
+
+        presenter.fetchUserProfile()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+    override fun showProgress(enabled: Boolean) {
+        binding?.progressProfile?.visibility = if (enabled) View.VISIBLE else View.GONE
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_profile, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun displayUserProfile(userAuth: UserAuth) {
+        binding?.txvProfilePostsCount?.text = userAuth.postCount.toString()
+        binding?.txvProfileFollowingCount?.text = userAuth.followingCount.toString()
+        binding?.txvProfileFollowersCount?.text = userAuth.followersCount.toString()
+        binding?.txvProfileUsername?.text = userAuth.name
+        binding?.txvProfileBio?.text = "TODO"
+        presenter.fetchUserPosts()
     }
 
-    private class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+    override fun displayRequestFailure(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-            return PostViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_profile_grid, parent, false)
-            )
-        }
+    override fun displayEmptyPosts() {
+        binding?.txvProfileEmpty?.visibility = View.VISIBLE
+        binding?.rvProfile?.visibility = View.GONE
 
-        override fun getItemCount(): Int {
-            return 30
-        }
+    }
 
-        override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-            holder.bind(R.drawable.ic_insta_add)
-        }
+    override fun displayFullPosts(posts: List<Post>) {
+        binding?.txvProfileEmpty?.visibility = View.GONE
+        binding?.rvProfile?.visibility = View.VISIBLE
+        adapter.items = posts
+        adapter.notifyDataSetChanged()
+    }
 
-        private class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            fun bind(image: Int) {
-                itemView.findViewById<ImageView>(R.id.imgItemProfileGrid).setImageResource(image)
-            }
-        }
+    override fun getMenu(): Int? {
+        return R.menu.menu_profile
     }
 }
