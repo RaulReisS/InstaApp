@@ -5,9 +5,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.raulreis.instaapp.R
 import br.com.raulreis.instaapp.common.base.BaseFragment
+import br.com.raulreis.instaapp.common.base.DependencyInjector
 import br.com.raulreis.instaapp.common.model.Post
 import br.com.raulreis.instaapp.common.model.UserAuth
 import br.com.raulreis.instaapp.databinding.FragmentProfileBinding
+import br.com.raulreis.instaapp.profile.Profile
+import br.com.raulreis.instaapp.profile.presentation.ProfilePresenter
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     R.layout.fragment_profile,
@@ -19,7 +22,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     private val adapter = PostAdapter()
 
     override fun setupPresenter() {
-        // TODO: presenter = ProfilePresenter(this, repository)
+        val repository = DependencyInjector.profileRepository()
+        presenter = ProfilePresenter(this, repository)
     }
 
     override fun setupViews() {

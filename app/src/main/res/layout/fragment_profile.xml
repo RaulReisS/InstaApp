@@ -151,12 +151,15 @@
     
     <ProgressBar
         android:id="@+id/progressProfile"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
         android:visibility="gone"
+        tools:visibility="visible"
         android:id="@+id/txvProfileEmpty"
         android:layout_gravity="center"
         android:text="@string/empty_list"

@@ -1,4 +1,4 @@
-package br.com.raulreis.instaapp.profile.view
+package br.com.raulreis.instaapp.profile
 
 import br.com.raulreis.instaapp.common.base.BasePresenter
 import br.com.raulreis.instaapp.common.base.BaseView

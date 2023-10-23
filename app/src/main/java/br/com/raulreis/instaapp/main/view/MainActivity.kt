@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private lateinit var searchFragment: Fragment
     private lateinit var cameraFragment: Fragment
     private lateinit var profileFragment: Fragment
+
     private var currentFragment: Fragment? = null
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -63,34 +64,33 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var scrollToolbarEnabled = false
+
         when(item.itemId) {
             R.id.menu_bottom_home -> {
-                if (currentFragment == homeFragment)
-                    return false
+                if (currentFragment == homeFragment) return false
                 currentFragment = homeFragment
             }
-            R.id.menu_bottom_search -> {
-                if (currentFragment == searchFragment)
-                    return false
+            R.id.menu_bottom_search-> {
+                if (currentFragment == searchFragment) return false
                 currentFragment = searchFragment
             }
             R.id.menu_bottom_add -> {
-                if (currentFragment == cameraFragment)
-                    return false
+                if (currentFragment == cameraFragment) return false
                 currentFragment = cameraFragment
             }
             R.id.menu_bottom_profile -> {
-                if (currentFragment == profileFragment)
-                    return false
+                if (currentFragment == profileFragment) return false
                 currentFragment = profileFragment
                 scrollToolbarEnabled = true
             }
         }
+
         setScrollToolbarEnaled(scrollToolbarEnabled)
 
         currentFragment?.let {
             replaceFragment(R.id.fragmentMain, it)
         }
+
         return true
     }
 
