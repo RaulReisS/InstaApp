@@ -1,5 +1,8 @@
 package br.com.raulreis.instaapp.common.base
 
+import br.com.raulreis.instaapp.home.data.FeedMemoryCache
+import br.com.raulreis.instaapp.home.data.HomeDataSourceFactory
+import br.com.raulreis.instaapp.home.data.HomeRepository
 import br.com.raulreis.instaapp.login.data.FakeDataSource
 import br.com.raulreis.instaapp.login.data.LoginRepository
 import br.com.raulreis.instaapp.profile.data.PostListMemoryCache
@@ -26,5 +29,9 @@ object DependencyInjector {
 
     fun profileRepository() : ProfileRepository {
         return ProfileRepository(ProfileDataSourceFactory(ProfileMemoryCache, PostListMemoryCache))
+    }
+
+    fun homeRepository() : HomeRepository {
+        return HomeRepository(HomeDataSourceFactory(FeedMemoryCache))
     }
 }
