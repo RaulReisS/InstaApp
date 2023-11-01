@@ -6,5 +6,5 @@ interface Cache<T> {
 
     fun get(key: String) : T?
 
-    fun put(data: T)
+    fun put(data: T?)
 }

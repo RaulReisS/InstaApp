@@ -1,5 +1,6 @@
 package br.com.raulreis.instaapp.profile.data
 
+import br.com.raulreis.instaapp.common.base.Cache
 import br.com.raulreis.instaapp.common.base.RequestCallback
 import br.com.raulreis.instaapp.common.model.Database
 import br.com.raulreis.instaapp.common.model.Post
@@ -7,8 +8,8 @@ import br.com.raulreis.instaapp.common.model.UserAuth
 import java.lang.RuntimeException
 
 class ProfileLocalDataSource(
-    private val profileCache: ProfileCache<UserAuth>,
-    private val postsCache: ProfileCache<List<Post>>
+    private val profileCache: Cache<UserAuth>,
+    private val postsCache: Cache<List<Post>>
 ) : ProfileDataSource {
     override fun fetchUserProfile(userUUID: String, callback: RequestCallback<UserAuth>) {
         val userAuth = profileCache.get(userUUID)
@@ -40,7 +41,7 @@ class ProfileLocalDataSource(
         profileCache.put(response)
     }
 
-    override fun putPosts(response: List<Post>) {
+    override fun putPosts(response: List<Post>?) {
         postsCache.put(response)
     }
 }

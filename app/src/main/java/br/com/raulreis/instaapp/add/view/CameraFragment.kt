@@ -3,6 +3,7 @@ package br.com.raulreis.instaapp.add.view
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,8 @@ class CameraFragment : Fragment() {
 
     private var imageCapture : ImageCapture? = null
 
+    private var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +44,10 @@ class CameraFragment : Fragment() {
         previewView = view.findViewById(R.id.imgCamera)
         view.findViewById<Button>(R.id.imgCameraPicture).setOnClickListener {
             takePhoto()
+        }
+
+        view.findViewById<Button>(R.id.btnCameraChange).setOnClickListener {
+            changeCamera()
         }
     }
 
@@ -90,9 +97,10 @@ class CameraFragment : Fragment() {
                 }
 
             imageCapture = ImageCapture.Builder()
+                .setTargetResolution(Size(480, 480))
                 .build()
 
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            //val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
                 cameraProvider.unbindAll()
@@ -103,5 +111,13 @@ class CameraFragment : Fragment() {
             }
 
         }, ContextCompat.getMainExecutor(requireContext()))
+    }
+
+    private fun changeCamera() {
+        cameraSelector = if(cameraSelector == CameraSelector.DEFAULT_FRONT_CAMERA)
+            CameraSelector.DEFAULT_BACK_CAMERA
+        else
+            CameraSelector.DEFAULT_FRONT_CAMERA
+        startCamera()
     }
 }

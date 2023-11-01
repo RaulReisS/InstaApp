@@ -43,6 +43,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.txvProfileFollowersCount?.text = userAuth.followersCount.toString()
         binding?.txvProfileUsername?.text = userAuth.name
         binding?.txvProfileBio?.text = "TODO"
+        binding?.imgProfileIcon?.setImageURI(userAuth.photoUri)
+
         presenter.fetchUserPosts()
     }
 

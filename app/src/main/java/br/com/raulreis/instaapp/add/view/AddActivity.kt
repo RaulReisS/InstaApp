@@ -53,7 +53,7 @@ class AddActivity : AppCompatActivity(), Add.View {
                 return true
             }
             R.id.action_share -> {
-                presenter.createPost(uri, binding.edtAddCaption.toString())
+                presenter.createPost(uri, binding.edtAddCaption.text.toString())
                 return true
             }
         }
@@ -65,6 +65,7 @@ class AddActivity : AppCompatActivity(), Add.View {
     }
 
     override fun displayRequestSuccess() {
+        setResult(RESULT_OK)
         finish()
     }
 

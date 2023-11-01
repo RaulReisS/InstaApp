@@ -4,7 +4,6 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import br.com.raulreis.instaapp.common.model.Database
-import br.com.raulreis.instaapp.common.model.Photo
 import br.com.raulreis.instaapp.common.model.UserAuth
 import java.util.UUID
 
@@ -33,7 +32,7 @@ class FakeRegisterDataSource: RegisterDataSource {
             }
             else {
 
-                val newUser = UserAuth(UUID.randomUUID().toString(), name, email, password)
+                val newUser = UserAuth(UUID.randomUUID().toString(), name, email, password, null)
 
                 val created = Database.usersAuth.add(newUser)
 
@@ -64,20 +63,11 @@ class FakeRegisterDataSource: RegisterDataSource {
                 callback.onFailure("Usuário não encontrado")
             }
             else {
-
-                val newPhoto = Photo(userAuth.uuid, photoUri)
-
-                val created = Database.photos.add(newPhoto)
-
-                if (created) {
-                    callback.onSuccess()
-                }
-                else {
-                    callback.onFailure("Erro interno no servidor")
-                }
-
+                val index = Database.usersAuth.indexOf(Database.sessionAuth)
+                Database.usersAuth[index] = Database.sessionAuth!!.copy(photoUri = photoUri)
+                Database.sessionAuth = Database.usersAuth[index]
+                callback.onSuccess()
             }
-
             callback.onComplete()
         }, 2000)
     }

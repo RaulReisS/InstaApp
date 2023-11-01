@@ -2,6 +2,8 @@ package br.com.raulreis.instaapp.add.view
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -22,6 +24,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class AddFragment : Fragment(R.layout.fragment_add) {
 
     private var binding: FragmentAddBinding? = null
+    private var addListener: AddListener? = null
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +35,15 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             uri?.let {
                 val intent = Intent(requireContext(), AddActivity::class.java)
                 intent.putExtra("photoUri", uri)
-                startActivity(intent)
+                addActivityResult.launch(intent)
             }
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is AddListener){
+            addListener = context
         }
     }
 
@@ -91,8 +101,18 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         setFragmentResult("cameraKey", bundleOf("startCamera" to true))
     }
 
+    private val addActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            addListener?.onPostCreated()
+        }
+    }
+
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(requireContext(), REQUIRED_PERMISSION) == PackageManager.PERMISSION_GRANTED
+
+    interface AddListener {
+        fun onPostCreated()
+    }
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
