@@ -1,4 +1,4 @@
-package br.com.raulreis.instaapp.add.view
+package br.com.raulreis.instaapp.post.view
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

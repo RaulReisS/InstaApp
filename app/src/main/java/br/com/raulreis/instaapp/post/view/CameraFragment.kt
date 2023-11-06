@@ -1,4 +1,4 @@
-package br.com.raulreis.instaapp.add.view
+package br.com.raulreis.instaapp.post.view
 
 import android.net.Uri
 import android.os.Bundle

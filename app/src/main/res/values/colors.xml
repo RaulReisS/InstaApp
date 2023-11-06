@@ -5,6 +5,7 @@
 
     <color name="blue_disabled">#C3E0Fa</color>
     <color name="blue_enabled">#3897F0</color>
+    <color name="blue_selected">#783897F0</color>
 
     <color name="gray_border">#DBDBDB</color>
     <color name="gray">#FAFAFA</color>

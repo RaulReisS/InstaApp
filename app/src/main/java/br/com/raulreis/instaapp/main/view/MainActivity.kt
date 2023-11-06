@@ -10,7 +10,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import br.com.raulreis.instaapp.R
-import br.com.raulreis.instaapp.add.view.AddFragment
+import br.com.raulreis.instaapp.post.view.AddFragment
 import br.com.raulreis.instaapp.common.extension.replaceFragment
 import br.com.raulreis.instaapp.databinding.ActivityMainBinding
 import br.com.raulreis.instaapp.home.view.HomeFragment
@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_bottom_add -> {
                 if (currentFragment == addFragment) return false
                 currentFragment = addFragment
+                scrollToolbarEnabled = false
             }
             R.id.menu_bottom_profile -> {
                 if (currentFragment == profileFragment) return false

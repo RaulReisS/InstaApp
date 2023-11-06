@@ -14,8 +14,8 @@ object Database {
     var sessionAuth: UserAuth? = null
 
     init {
-        val userA = UserAuth(UUID.randomUUID().toString(),"UserA", "userA@gmail.com", "12456789", Uri.fromFile(File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-10-31-23-50-33-998.jpg")))
-        val userB = UserAuth(UUID.randomUUID().toString(),"UserB", "userB@gmail.com", "98765421", Uri.fromFile(File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-10-31-23-50-33-998.jpg")))
+        val userA = UserAuth(UUID.randomUUID().toString(),"UserA", "userA@gmail.com", "12456789", Uri.fromFile(File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-11-06-17-33-11-125.jpg")))
+        val userB = UserAuth(UUID.randomUUID().toString(),"UserB", "userB@gmail.com", "98765421", Uri.fromFile(File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-11-06-17-33-11-125.jpg")))
         usersAuth.add(userA)
         usersAuth.add(userB)
 
@@ -30,23 +30,23 @@ object Database {
         feeds[userA.uuid]?.addAll(
             arrayListOf(
                 Post(UUID.randomUUID().toString(), Uri.fromFile(
-                    File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-10-31-23-51-07-513.jpg")),
+                    File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-11-06-17-32-55-964.jpg")),
                     "desc1",
                     System.currentTimeMillis(), userA),
 
                 Post(UUID.randomUUID().toString(), Uri.fromFile(
-                    File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-10-31-23-51-07-513.jpg")),
+                    File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-11-06-17-32-55-964.jpg")),
                     "desc2",
                     System.currentTimeMillis(), userA),
 
                 Post(UUID.randomUUID().toString(), Uri.fromFile(
-                    File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-10-31-23-51-07-513.jpg")
+                    File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-11-06-17-32-55-964.jpg")
                 ),
                     "desc3",
                     System.currentTimeMillis(), userA),
 
                 Post(UUID.randomUUID().toString(), Uri.fromFile(
-                    File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-10-31-23-51-07-513.jpg")),
+                    File("/storage/self/primary/Android/media/br.com.raulreis.instaapp/InstaApp/2023-11-06-17-32-55-964.jpg")),
                     "desc4",
                     System.currentTimeMillis(), userA),
             )

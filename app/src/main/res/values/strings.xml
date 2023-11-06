@@ -45,5 +45,6 @@
     <string name="logout_action">Logout</string>
     <string name="cancel">Cancel</string>
     <string name="empty_list">No posts found</string>
+    <string name="empty_image">No pictures found</string>
     <string name="permission_camera_denied">Camera permission not granted</string>
 </resources>
