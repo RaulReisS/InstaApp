@@ -1,8 +1,10 @@
 package br.com.raulreis.instaapp.profile.view
 
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.raulreis.instaapp.R
 import br.com.raulreis.instaapp.common.base.BaseFragment
 import br.com.raulreis.instaapp.common.base.DependencyInjector
@@ -11,15 +13,17 @@ import br.com.raulreis.instaapp.common.model.UserAuth
 import br.com.raulreis.instaapp.databinding.FragmentProfileBinding
 import br.com.raulreis.instaapp.profile.Profile
 import br.com.raulreis.instaapp.profile.presentation.ProfilePresenter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     R.layout.fragment_profile,
     FragmentProfileBinding::bind
-), Profile.View {
+), Profile.View, BottomNavigationView.OnNavigationItemSelectedListener {
 
     override lateinit var presenter: Profile.Presenter
 
     private val adapter = PostAdapter()
+    private var uuid : String? = null
 
     override fun setupPresenter() {
         val repository = DependencyInjector.profileRepository()
@@ -27,10 +31,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     }
 
     override fun setupViews() {
+
+        uuid = arguments?.getString(KEY_USER_ID)
+
         binding?.rvProfile?.layoutManager = GridLayoutManager(requireContext(), 3)
         binding?.rvProfile?.adapter = adapter
+        binding?.navProfileTabs?.setOnNavigationItemSelectedListener(this)
 
-        presenter.fetchUserProfile()
+        presenter.fetchUserProfile(uuid)
     }
 
     override fun showProgress(enabled: Boolean) {
@@ -45,7 +53,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.txvProfileBio?.text = "TODO"
         binding?.imgProfileIcon?.setImageURI(userAuth.photoUri)
 
-        presenter.fetchUserPosts()
+        presenter.fetchUserPosts(uuid)
     }
 
     override fun displayRequestFailure(message: String) {
@@ -67,5 +75,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 
     override fun getMenu(): Int? {
         return R.menu.menu_profile
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_profile_grid -> {
+                binding?.rvProfile?.layoutManager = GridLayoutManager(requireContext(), 3)
+            }
+            R.id.menu_profile_list -> {
+                binding?.rvProfile?.layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
+        return true
+    }
+
+    companion object {
+        const val KEY_USER_ID = "key_user_id"
     }
 }

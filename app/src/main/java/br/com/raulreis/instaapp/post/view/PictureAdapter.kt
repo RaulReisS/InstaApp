@@ -15,7 +15,7 @@ import br.com.raulreis.instaapp.R
 class PictureAdapter(private val onClick : (Uri) -> Unit) : RecyclerView.Adapter<PictureAdapter.PictureViewHolder>() {
 
     var items: List<Uri> = mutableListOf()
-    var prevView: View? = null
+    private var prevView: View? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureViewHolder {
         return PictureViewHolder(

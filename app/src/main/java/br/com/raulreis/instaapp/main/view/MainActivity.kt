@@ -19,7 +19,11 @@ import br.com.raulreis.instaapp.search.view.SearchFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, AddFragment.AddListener {
+class MainActivity :
+    AppCompatActivity(),
+    BottomNavigationView.OnNavigationItemSelectedListener,
+    AddFragment.AddListener,
+    SearchFragment.SearchListener {
 
     private lateinit var binding : ActivityMainBinding
 
@@ -73,6 +77,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_bottom_search-> {
                 if (currentFragment == searchFragment) return false
                 currentFragment = searchFragment
+                scrollToolbarEnabled = false
             }
             R.id.menu_bottom_add -> {
                 if (currentFragment == addFragment) return false
@@ -116,5 +121,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             profileFragment.presenter.clear()
 
         binding.bottomnavMain.selectedItemId = R.id.menu_bottom_home
+    }
+
+    override fun goToProfile(uuid: String) {
+        val fragment = ProfileFragment().apply {
+            arguments = Bundle().apply {
+                putString(ProfileFragment.KEY_USER_ID, uuid)
+            }
+        }
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentMain, fragment, fragment.javaClass.simpleName + "detail")
+            addToBackStack(null)
+            commit()
+        }
     }
 }

@@ -8,9 +8,9 @@ import br.com.raulreis.instaapp.common.model.UserAuth
 interface Profile {
 
     interface Presenter : BasePresenter {
-        fun fetchUserProfile()
+        fun fetchUserProfile(uuid: String?)
 
-        fun fetchUserPosts()
+        fun fetchUserPosts(uuid: String?)
 
         fun clear()
     }

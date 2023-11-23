@@ -5,7 +5,7 @@
         android:title="@string/home"
         android:icon="@drawable/ic_insta_grid"/>
 
-    <item android:id="@+id/menu_profile_listed"
+    <item android:id="@+id/menu_profile_list"
         android:title="@string/home"
         android:icon="@drawable/ic_insta_listed"/>
 

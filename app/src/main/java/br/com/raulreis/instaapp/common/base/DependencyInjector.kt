@@ -17,6 +17,8 @@ import br.com.raulreis.instaapp.profile.data.ProfileMemoryCache
 import br.com.raulreis.instaapp.profile.data.ProfileRepository
 import br.com.raulreis.instaapp.register.data.FakeRegisterDataSource
 import br.com.raulreis.instaapp.register.data.RegisterRepository
+import br.com.raulreis.instaapp.search.data.SearchFakeRemoteDataSource
+import br.com.raulreis.instaapp.search.data.SearchRepository
 import br.com.raulreis.instaapp.splash.data.FakeLocalDataSource
 import br.com.raulreis.instaapp.splash.data.SplashRepository
 
@@ -31,6 +33,10 @@ object DependencyInjector {
 
     fun splashRepository() : SplashRepository {
         return SplashRepository(FakeLocalDataSource())
+    }
+
+    fun searchRepository() : SearchRepository {
+        return SearchRepository(SearchFakeRemoteDataSource())
     }
 
     fun profileRepository() : ProfileRepository {
