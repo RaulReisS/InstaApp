@@ -98,7 +98,6 @@
         app:layout_constraintTop_toBottomOf="@id/txvProfileFollowing"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
-        android:text="@string/edit_profile"
         android:layout_height="wrap_content"
         style="@style/Theme.InstaApp.Button.White"/>
 

@@ -9,7 +9,7 @@ object Database {
     val usersAuth = mutableListOf<UserAuth>()
     val posts = hashMapOf<String, MutableSet<Post>>()
     val feeds = hashMapOf<String, MutableSet<Post>>()
-    val followers = hashMapOf<String, Set<String>>()
+    val followers = hashMapOf<String, MutableSet<String>>()
 
     var sessionAuth: UserAuth? = null
 
@@ -33,5 +33,7 @@ object Database {
         }
 
         sessionAuth = usersAuth.first()
+
+        followers[sessionAuth!!.uuid]?.add(usersAuth[1].uuid)
     }
 }

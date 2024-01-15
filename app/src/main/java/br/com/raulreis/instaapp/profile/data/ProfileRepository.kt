@@ -11,16 +11,35 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
         localDataSource.putPosts(null)
     }
 
-    fun fetchUserProfile(uuid : String?,callback: RequestCallback<UserAuth>) {
+    fun fetchUserProfile(uuid : String?,callback: RequestCallback<Pair<UserAuth, Boolean?>>) {
         val localDataSource = dataSourceFactory.createLocalDataSource()
         val userId = uuid ?: localDataSource.fetchSession().uuid
         val dataSource = dataSourceFactory.createFromUser(uuid)
 
-        dataSource.fetchUserProfile(userId, object : RequestCallback<UserAuth> {
-            override fun onSuccess(data: UserAuth) {
+        dataSource.fetchUserProfile(userId, object : RequestCallback<Pair<UserAuth, Boolean?>> {
+            override fun onSuccess(data: Pair<UserAuth, Boolean?>) {
                 if (uuid == null) {
                     localDataSource.putUser(data)
                 }
+                callback.onSuccess(data)
+            }
+
+            override fun onFailure(message: String) {
+                callback.onFailure(message)
+            }
+
+            override fun onComplete() {
+                callback.onComplete()
+            }
+        })
+    }
+    fun followUser(uuid: String?, follow: Boolean, callback: RequestCallback<Boolean>) {
+        val localDataSource = dataSourceFactory.createLocalDataSource()
+        val userId = uuid ?: localDataSource.fetchSession().uuid
+        val dataSource = dataSourceFactory.createRemoteDataSource()
+
+        dataSource.followUser(userId, follow, object : RequestCallback<Boolean> {
+            override fun onSuccess(data: Boolean) {
                 callback.onSuccess(data)
             }
 

@@ -38,6 +38,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.rvProfile?.adapter = adapter
         binding?.navProfileTabs?.setOnNavigationItemSelectedListener(this)
 
+        binding?.btnEditProfile?.setOnClickListener {
+            if (it.tag == true) {
+                binding?.btnEditProfile?.text = getString(R.string.follow)
+                binding?.btnEditProfile?.tag = false
+                presenter.followUser(uuid, false)
+            }
+            else if (it.tag == false) {
+                binding?.btnEditProfile?.text = getString(R.string.unfollow)
+                binding?.btnEditProfile?.tag = true
+                presenter.followUser(uuid, true)
+            }
+
+        }
+
         presenter.fetchUserProfile(uuid)
     }
 
@@ -45,13 +59,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.progressProfile?.visibility = if (enabled) View.VISIBLE else View.GONE
     }
 
-    override fun displayUserProfile(userAuth: UserAuth) {
+    override fun displayUserProfile(user: Pair<UserAuth, Boolean?>) {
+        val (userAuth, following) = user
+
         binding?.txvProfilePostsCount?.text = userAuth.postCount.toString()
         binding?.txvProfileFollowingCount?.text = userAuth.followingCount.toString()
         binding?.txvProfileFollowersCount?.text = userAuth.followersCount.toString()
         binding?.txvProfileUsername?.text = userAuth.name
         binding?.txvProfileBio?.text = "TODO"
         binding?.imgProfileIcon?.setImageURI(userAuth.photoUri)
+
+        binding?.btnEditProfile?.text = when(following) {
+            null -> getString(R.string.edit_profile)
+            true -> getString(R.string.unfollow)
+            false -> getString(R.string.follow)
+        }
+
+        binding?.btnEditProfile?.tag = following
 
         presenter.fetchUserPosts(uuid)
     }

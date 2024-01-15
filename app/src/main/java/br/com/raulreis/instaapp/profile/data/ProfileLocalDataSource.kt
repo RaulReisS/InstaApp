@@ -8,10 +8,10 @@ import br.com.raulreis.instaapp.common.model.UserAuth
 import java.lang.RuntimeException
 
 class ProfileLocalDataSource(
-    private val profileCache: Cache<UserAuth>,
+    private val profileCache: Cache<Pair<UserAuth, Boolean?>>,
     private val postsCache: Cache<List<Post>>
 ) : ProfileDataSource {
-    override fun fetchUserProfile(userUUID: String, callback: RequestCallback<UserAuth>) {
+    override fun fetchUserProfile(userUUID: String, callback: RequestCallback<Pair<UserAuth, Boolean?>>) {
         val userAuth = profileCache.get(userUUID)
         if (userAuth != null) {
             callback.onSuccess(userAuth)
@@ -37,7 +37,7 @@ class ProfileLocalDataSource(
         return Database.sessionAuth ?: throw RuntimeException("Usuário não logado")
     }
 
-    override fun putUser(response: UserAuth) {
+    override fun putUser(response: Pair<UserAuth, Boolean?>) {
         profileCache.put(response)
     }
 

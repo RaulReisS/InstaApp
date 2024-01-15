@@ -36,7 +36,7 @@
     <string name="share">compartilhar</string>
     <string name="go">Avançar</string>
     <string name="search">Pesquisar</string>
-    <string name="unfollow">Seguindo</string>
+    <string name="unfollow">Deixar de seguir</string>
     <string name="follow">Seguir</string>
     <string name="logout">Deseja sair?</string>
     <string name="logout_action">Sair</string>
