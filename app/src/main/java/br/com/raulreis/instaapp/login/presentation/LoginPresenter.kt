@@ -2,7 +2,6 @@ package br.com.raulreis.instaapp.login.presentation
 
 import android.util.Patterns
 import br.com.raulreis.instaapp.R
-import br.com.raulreis.instaapp.common.model.UserAuth
 import br.com.raulreis.instaapp.login.Login
 import br.com.raulreis.instaapp.login.data.LoginCallback
 import br.com.raulreis.instaapp.login.data.LoginRepository
@@ -33,7 +32,7 @@ class LoginPresenter(
             view?.showProgress(true)
 
             repository.login(email, password, object : LoginCallback {
-                override fun onSuccess(userAuth: UserAuth) {
+                override fun onSuccess() {
                     view?.onUserAuthenticated()
                 }
 

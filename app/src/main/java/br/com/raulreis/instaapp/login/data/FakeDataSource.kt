@@ -20,7 +20,7 @@ class FakeDataSource: LoginDataSource {
                 callback.onFailure("Senha está incorreta")
             } else {
                 Database.sessionAuth = userAuth
-                callback.onSuccess(userAuth)
+                callback.onSuccess()
             }
 
             callback.onComplete()
