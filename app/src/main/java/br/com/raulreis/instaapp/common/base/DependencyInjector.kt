@@ -19,7 +19,7 @@ import br.com.raulreis.instaapp.register.data.FireRegisterDataSource
 import br.com.raulreis.instaapp.register.data.RegisterRepository
 import br.com.raulreis.instaapp.search.data.SearchFakeRemoteDataSource
 import br.com.raulreis.instaapp.search.data.SearchRepository
-import br.com.raulreis.instaapp.splash.data.FakeLocalDataSource
+import br.com.raulreis.instaapp.splash.data.FireSplashDataSource
 import br.com.raulreis.instaapp.splash.data.SplashRepository
 
 object DependencyInjector {
@@ -32,7 +32,7 @@ object DependencyInjector {
     }
 
     fun splashRepository() : SplashRepository {
-        return SplashRepository(FakeLocalDataSource())
+        return SplashRepository(FireSplashDataSource())
     }
 
     fun searchRepository() : SearchRepository {

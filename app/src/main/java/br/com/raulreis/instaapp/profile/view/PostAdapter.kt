@@ -1,13 +1,13 @@
 package br.com.raulreis.instaapp.profile.view
 
-import android.net.Uri
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.raulreis.instaapp.R
 import br.com.raulreis.instaapp.common.model.Post
+import com.bumptech.glide.Glide
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
@@ -24,12 +24,12 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.bind(items[position].uri)
+        holder.bind(items[position].photoUrl)
     }
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(image: Uri) {
-            itemView.findViewById<ImageView>(R.id.imgItemProfileGrid).setImageURI(image)
+        fun bind(photoUrl: String?) {
+            Glide.with(itemView.context).load(photoUrl).into(itemView.findViewById(R.id.imgItemProfileGrid))
         }
     }
 }

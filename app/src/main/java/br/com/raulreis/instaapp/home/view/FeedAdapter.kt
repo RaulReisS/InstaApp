@@ -3,11 +3,11 @@ package br.com.raulreis.instaapp.home.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.raulreis.instaapp.R
 import br.com.raulreis.instaapp.common.model.Post
+import com.bumptech.glide.Glide
 
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
@@ -29,11 +29,12 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(post: Post) {
-            itemView.findViewById<ImageView>(R.id.imgHomePost).setImageURI(post.uri)
-            itemView.findViewById<ImageView>(R.id.imgHomeUser).setImageURI(post.publisher.photoUri)
+
+            Glide.with(itemView.context).load(post.photoUrl).into(itemView.findViewById(R.id.imgHomePost))
+            Glide.with(itemView.context).load(post.publisher?.photoUrl).into(itemView.findViewById(R.id.imgHomeUser))
 
             itemView.findViewById<TextView>(R.id.txvHomeCaption).text = post.caption
-            itemView.findViewById<TextView>(R.id.txvHomeUsername).text = post.publisher.name
+            itemView.findViewById<TextView>(R.id.txvHomeUsername).text = post.publisher?.name
         }
     }
 }
