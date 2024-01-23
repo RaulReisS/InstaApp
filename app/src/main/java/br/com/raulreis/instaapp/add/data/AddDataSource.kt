@@ -2,7 +2,6 @@ package br.com.raulreis.instaapp.add.data
 
 import android.net.Uri
 import br.com.raulreis.instaapp.common.base.RequestCallback
-import br.com.raulreis.instaapp.common.model.UserAuth
 
 interface AddDataSource {
 
@@ -10,5 +9,5 @@ interface AddDataSource {
         throw UnsupportedOperationException()
     }
 
-    fun fetchSession() : UserAuth { throw UnsupportedOperationException() }
+    fun fetchSession() : String { throw UnsupportedOperationException() }
 }

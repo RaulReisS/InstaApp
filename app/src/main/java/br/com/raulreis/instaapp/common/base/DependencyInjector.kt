@@ -1,9 +1,9 @@
 package br.com.raulreis.instaapp.common.base
 
 import android.content.Context
-import br.com.raulreis.instaapp.add.data.AddFakeRemoteDataSource
 import br.com.raulreis.instaapp.add.data.AddLocalDataSource
 import br.com.raulreis.instaapp.add.data.AddRepository
+import br.com.raulreis.instaapp.add.data.FireAddDataSource
 import br.com.raulreis.instaapp.home.data.FeedMemoryCache
 import br.com.raulreis.instaapp.home.data.HomeDataSourceFactory
 import br.com.raulreis.instaapp.home.data.HomeRepository
@@ -48,7 +48,7 @@ object DependencyInjector {
     }
 
     fun addRepository() : AddRepository {
-        return AddRepository(AddFakeRemoteDataSource(), AddLocalDataSource())
+        return AddRepository(FireAddDataSource(), AddLocalDataSource())
     }
 
     fun postRepository(context : Context) : PostRepository {

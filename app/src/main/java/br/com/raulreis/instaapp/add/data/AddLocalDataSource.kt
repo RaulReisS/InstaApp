@@ -1,12 +1,11 @@
 package br.com.raulreis.instaapp.add.data
 
-import br.com.raulreis.instaapp.common.model.Database
-import br.com.raulreis.instaapp.common.model.UserAuth
+import com.google.firebase.auth.FirebaseAuth
 import java.lang.RuntimeException
 
 class AddLocalDataSource: AddDataSource {
 
-    override fun fetchSession(): UserAuth {
-        return Database.sessionAuth ?: throw RuntimeException("Usuário não logado!")
+    override fun fetchSession(): String {
+        return FirebaseAuth.getInstance().uid ?: throw RuntimeException("Usuário não logado!")
     }
 }
