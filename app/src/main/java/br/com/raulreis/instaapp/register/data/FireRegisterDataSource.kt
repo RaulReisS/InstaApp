@@ -4,7 +4,6 @@ import android.net.Uri
 import br.com.raulreis.instaapp.common.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.toObject
 import com.google.firebase.storage.FirebaseStorage
 
 class FireRegisterDataSource : RegisterDataSource {
@@ -83,7 +82,7 @@ class FireRegisterDataSource : RegisterDataSource {
                 // Aqui a foto já subiu para o Fire Storage
 
                 imgRef.downloadUrl
-                    .addOnCompleteListener{res ->
+                    .addOnSuccessListener{res ->
                         val usersRef = FirebaseFirestore.getInstance().collection("/users").document(uid)
 
                         usersRef.get()

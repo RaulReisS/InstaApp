@@ -2,7 +2,7 @@ package br.com.raulreis.instaapp.search.presentation
 
 
 import br.com.raulreis.instaapp.common.base.RequestCallback
-import br.com.raulreis.instaapp.common.model.UserAuth
+import br.com.raulreis.instaapp.common.model.User
 import br.com.raulreis.instaapp.search.Search
 import br.com.raulreis.instaapp.search.data.SearchRepository
 
@@ -13,8 +13,8 @@ class SearchPresenter(
 
     override fun fetchUsers(name: String) {
         view?.showProgress(true)
-        repository.fetchUsers(name, object : RequestCallback<List<UserAuth>> {
-            override fun onSuccess(data: List<UserAuth>) {
+        repository.fetchUsers(name, object : RequestCallback<List<User>> {
+            override fun onSuccess(data: List<User>) {
                 if (data.isEmpty()) {
                     view?.displayEmptyUsers()
                 }

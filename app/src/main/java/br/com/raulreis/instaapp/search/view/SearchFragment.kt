@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.raulreis.instaapp.R
 import br.com.raulreis.instaapp.common.base.BaseFragment
 import br.com.raulreis.instaapp.common.base.DependencyInjector
-import br.com.raulreis.instaapp.common.model.UserAuth
+import br.com.raulreis.instaapp.common.model.User
 import br.com.raulreis.instaapp.databinding.FragmentSearchBinding
 import br.com.raulreis.instaapp.search.Search
 import br.com.raulreis.instaapp.search.presentation.SearchPresenter
@@ -77,7 +77,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, Search.Presenter>(
         binding?.progressSearch?.visibility = if (enabled) View.VISIBLE else View.GONE
     }
 
-    override fun displayFullUsers(users: List<UserAuth>) {
+    override fun displayFullUsers(users: List<User>) {
         binding?.txvSearchEmpty?.visibility = View.GONE
         binding?.rvSearch?.visibility = View.VISIBLE
         adapter.items = users

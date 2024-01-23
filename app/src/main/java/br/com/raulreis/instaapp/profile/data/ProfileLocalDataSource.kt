@@ -2,16 +2,16 @@ package br.com.raulreis.instaapp.profile.data
 
 import br.com.raulreis.instaapp.common.base.Cache
 import br.com.raulreis.instaapp.common.base.RequestCallback
-import br.com.raulreis.instaapp.common.model.Database
 import br.com.raulreis.instaapp.common.model.Post
-import br.com.raulreis.instaapp.common.model.UserAuth
+import br.com.raulreis.instaapp.common.model.User
+import com.google.firebase.auth.FirebaseAuth
 import java.lang.RuntimeException
 
 class ProfileLocalDataSource(
-    private val profileCache: Cache<Pair<UserAuth, Boolean?>>,
+    private val profileCache: Cache<Pair<User, Boolean?>>,
     private val postsCache: Cache<List<Post>>
 ) : ProfileDataSource {
-    override fun fetchUserProfile(userUUID: String, callback: RequestCallback<Pair<UserAuth, Boolean?>>) {
+    override fun fetchUserProfile(userUUID: String, callback: RequestCallback<Pair<User, Boolean?>>) {
         val userAuth = profileCache.get(userUUID)
         if (userAuth != null) {
             callback.onSuccess(userAuth)
@@ -33,11 +33,11 @@ class ProfileLocalDataSource(
         callback.onComplete()
     }
 
-    override fun fetchSession(): UserAuth {
-        return Database.sessionAuth ?: throw RuntimeException("Usuário não logado")
+    override fun fetchSession(): String {
+        return FirebaseAuth.getInstance().uid ?: throw RuntimeException("Usuário não logado")
     }
 
-    override fun putUser(response: Pair<UserAuth, Boolean?>) {
+    override fun putUser(response: Pair<User, Boolean?>) {
         profileCache.put(response)
     }
 

@@ -3,7 +3,7 @@ package br.com.raulreis.instaapp.profile.presentation
 
 import br.com.raulreis.instaapp.common.base.RequestCallback
 import br.com.raulreis.instaapp.common.model.Post
-import br.com.raulreis.instaapp.common.model.UserAuth
+import br.com.raulreis.instaapp.common.model.User
 import br.com.raulreis.instaapp.profile.Profile
 import br.com.raulreis.instaapp.profile.data.ProfileRepository
 
@@ -18,8 +18,8 @@ class ProfilePresenter(
 
     override fun fetchUserProfile(uuid: String?) {
         view?.showProgress(true)
-        repository.fetchUserProfile(uuid, object : RequestCallback<Pair<UserAuth, Boolean?>> {
-            override fun onSuccess(data: Pair<UserAuth, Boolean?>) {
+        repository.fetchUserProfile(uuid, object : RequestCallback<Pair<User, Boolean?>> {
+            override fun onSuccess(data: Pair<User, Boolean?>) {
                 view?.displayUserProfile(data)
             }
 

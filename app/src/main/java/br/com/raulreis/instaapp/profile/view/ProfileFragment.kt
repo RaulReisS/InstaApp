@@ -9,10 +9,11 @@ import br.com.raulreis.instaapp.R
 import br.com.raulreis.instaapp.common.base.BaseFragment
 import br.com.raulreis.instaapp.common.base.DependencyInjector
 import br.com.raulreis.instaapp.common.model.Post
-import br.com.raulreis.instaapp.common.model.UserAuth
+import br.com.raulreis.instaapp.common.model.User
 import br.com.raulreis.instaapp.databinding.FragmentProfileBinding
 import br.com.raulreis.instaapp.profile.Profile
 import br.com.raulreis.instaapp.profile.presentation.ProfilePresenter
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
@@ -59,15 +60,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.progressProfile?.visibility = if (enabled) View.VISIBLE else View.GONE
     }
 
-    override fun displayUserProfile(user: Pair<UserAuth, Boolean?>) {
+    override fun displayUserProfile(user: Pair<User, Boolean?>) {
         val (userAuth, following) = user
 
         binding?.txvProfilePostsCount?.text = userAuth.postCount.toString()
-        binding?.txvProfileFollowingCount?.text = userAuth.followingCount.toString()
-        binding?.txvProfileFollowersCount?.text = userAuth.followersCount.toString()
+        binding?.txvProfileFollowingCount?.text = userAuth.following.toString()
+        binding?.txvProfileFollowersCount?.text = userAuth.followers.toString()
         binding?.txvProfileUsername?.text = userAuth.name
         binding?.txvProfileBio?.text = "TODO"
-        binding?.imgProfileIcon?.setImageURI(userAuth.photoUri)
+
+        binding?.let {
+            Glide.with(requireContext()).load(userAuth.photoUrl).into(it.imgProfileIcon)
+        }
 
         binding?.btnEditProfile?.text = when(following) {
             null -> getString(R.string.edit_profile)

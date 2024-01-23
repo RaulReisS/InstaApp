@@ -17,7 +17,7 @@ import br.com.raulreis.instaapp.profile.data.ProfileMemoryCache
 import br.com.raulreis.instaapp.profile.data.ProfileRepository
 import br.com.raulreis.instaapp.register.data.FireRegisterDataSource
 import br.com.raulreis.instaapp.register.data.RegisterRepository
-import br.com.raulreis.instaapp.search.data.SearchFakeRemoteDataSource
+import br.com.raulreis.instaapp.search.data.FireSearchDataSource
 import br.com.raulreis.instaapp.search.data.SearchRepository
 import br.com.raulreis.instaapp.splash.data.FireSplashDataSource
 import br.com.raulreis.instaapp.splash.data.SplashRepository
@@ -36,7 +36,7 @@ object DependencyInjector {
     }
 
     fun searchRepository() : SearchRepository {
-        return SearchRepository(SearchFakeRemoteDataSource())
+        return SearchRepository(FireSearchDataSource())
     }
 
     fun profileRepository() : ProfileRepository {
