@@ -6,31 +6,28 @@ import br.com.raulreis.instaapp.common.model.Post
 import br.com.raulreis.instaapp.common.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import java.lang.RuntimeException
 
 class FireAddDataSource : AddDataSource {
-    override fun createPost(
-        userUUID: String,
-        uri: Uri,
-        caption: String,
-        callback: RequestCallback<Boolean>
-    ) {
-        val uriLasPath = uri.lastPathSegment ?: throw IllegalArgumentException("Invalid img")
+
+    override fun createPost(userUUID: String, uri: Uri, caption: String, callback: RequestCallback<Boolean>) {
+        val uriLastPath = uri.lastPathSegment ?: throw IllegalArgumentException("Invalid img")
 
         val imgRef = FirebaseStorage.getInstance().reference
             .child("images/")
             .child(userUUID)
-            .child(uriLasPath)
+            .child(uriLastPath)
 
         imgRef.putFile(uri)
             .addOnSuccessListener { res ->
                 imgRef.downloadUrl
                     .addOnSuccessListener { resDownload ->
+
                         FirebaseFirestore.getInstance()
                             .collection("/users")
                             .document(userUUID)
                             .get()
                             .addOnSuccessListener { resMe ->
+
                                 val me = resMe.toObject(User::class.java)
 
                                 val postRef = FirebaseFirestore.getInstance()
@@ -50,7 +47,7 @@ class FireAddDataSource : AddDataSource {
                                 postRef.set(post)
                                     .addOnSuccessListener { resPost ->
 
-                                        //Meu Feed
+                                        // meu feed
                                         FirebaseFirestore.getInstance()
                                             .collection("/feeds")
                                             .document(userUUID)
@@ -59,35 +56,32 @@ class FireAddDataSource : AddDataSource {
                                             .set(post)
                                             .addOnSuccessListener { resMyFeed ->
 
-                                                // Feed dos meus seguidores
+
+                                                // feed dos meus seguidores
                                                 FirebaseFirestore.getInstance()
                                                     .collection("/followers")
                                                     .document(userUUID)
-                                                    .collection("followers")
                                                     .get()
                                                     .addOnSuccessListener { resFollowers ->
 
-                                                        val documents = resFollowers.documents
+                                                        if (resFollowers.exists()) {
+                                                            val list = resFollowers.get("followers") as List<String>
 
-                                                        for (document in documents) {
-                                                            val followersUUID =
-                                                                document.toObject(String::class.java)
-                                                                    ?: throw RuntimeException("Falha ao converter seguidor")
-
-                                                            FirebaseFirestore.getInstance()
-                                                                .collection("/feed")
-                                                                .document(followersUUID)
-                                                                .collection("posts")
-                                                                .document(postRef.path)
-                                                                .set(post)
+                                                            for (followerUUID in list) {
+                                                                FirebaseFirestore.getInstance()
+                                                                    .collection("/feeds")
+                                                                    .document(followerUUID)
+                                                                    .collection("posts")
+                                                                    .document(postRef.id)
+                                                                    .set(post)
+                                                            }
                                                         }
+
                                                         callback.onSuccess(true)
+
                                                     }
                                                     .addOnFailureListener { exception ->
-                                                        callback.onFailure(
-                                                            exception.message
-                                                                ?: "Falha ao buscar meus seguidores"
-                                                        )
+                                                        callback.onFailure(exception.message ?: "Falha ao buscar meus seguidores")
                                                     }
                                                     .addOnCompleteListener {
                                                         callback.onComplete()
@@ -96,23 +90,20 @@ class FireAddDataSource : AddDataSource {
 
                                     }
                                     .addOnFailureListener { exception ->
-                                        callback.onFailure(
-                                            exception.message ?: "Erro ao inserir publicação"
-                                        )
+                                        callback.onFailure(exception.message ?: "Falha ao inserir um post")
                                     }
+
                             }
                             .addOnFailureListener { exception ->
-                                callback.onFailure(
-                                    exception.message ?: "Falha ao buscar usuário logado"
-                                )
+                                callback.onFailure(exception.message ?: "Falha ao buscar usuário logado")
                             }
                     }
                     .addOnFailureListener { exception ->
-                        callback.onFailure(exception.message ?: "Erro ao baixar a imagem")
+                        callback.onFailure(exception.message ?: "Falha ao baixar a foto")
                     }
             }
             .addOnFailureListener { exception ->
-                callback.onFailure(exception.message ?: "Erro ao enviar imagem")
+                callback.onFailure(exception.message ?: "Falha ao subir a foto")
             }
     }
 }
