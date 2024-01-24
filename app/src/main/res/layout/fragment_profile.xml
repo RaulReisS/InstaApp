@@ -30,6 +30,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgAddStory"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:src="@drawable/ic_insta_add_profile"
         app:civ_circle_background_color="@color/blue_enabled"
         app:civ_border_color="@color/white"
