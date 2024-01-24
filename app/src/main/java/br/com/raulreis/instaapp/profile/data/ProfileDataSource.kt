@@ -14,7 +14,7 @@ interface ProfileDataSource {
 
     fun fetchSession() : String { throw UnsupportedOperationException() }
 
-    fun putUser(response: Pair<User, Boolean?>) { throw UnsupportedOperationException() }
+    fun putUser(response: Pair<User, Boolean?>?) { throw UnsupportedOperationException() }
 
     fun putPosts(response: List<Post>?) { throw UnsupportedOperationException() }
 }

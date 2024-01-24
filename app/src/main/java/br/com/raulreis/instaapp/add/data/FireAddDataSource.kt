@@ -4,6 +4,7 @@ import android.net.Uri
 import br.com.raulreis.instaapp.common.base.RequestCallback
 import br.com.raulreis.instaapp.common.model.Post
 import br.com.raulreis.instaapp.common.model.User
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 
@@ -22,10 +23,11 @@ class FireAddDataSource : AddDataSource {
                 imgRef.downloadUrl
                     .addOnSuccessListener { resDownload ->
 
-                        FirebaseFirestore.getInstance()
+                        val meRef = FirebaseFirestore.getInstance()
                             .collection("/users")
                             .document(userUUID)
-                            .get()
+
+                            meRef.get()
                             .addOnSuccessListener { resMe ->
 
                                 val me = resMe.toObject(User::class.java)
@@ -46,6 +48,8 @@ class FireAddDataSource : AddDataSource {
 
                                 postRef.set(post)
                                     .addOnSuccessListener { resPost ->
+
+                                        meRef.update("postCount", FieldValue.increment(1))
 
                                         // meu feed
                                         FirebaseFirestore.getInstance()
