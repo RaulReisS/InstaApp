@@ -79,6 +79,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
             false -> getString(R.string.follow)
         }
 
+        binding?.imgAddStory?.visibility = if (following == null) View.VISIBLE else View.GONE
+
         binding?.btnEditProfile?.tag = following
 
         presenter.fetchUserPosts(uuid)
