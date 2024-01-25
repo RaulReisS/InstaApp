@@ -31,4 +31,8 @@ class HomeRepository(private val dataSourceFactory: HomeDataSourceFactory) {
            }
        })
     }
+
+    fun logout() {
+        dataSourceFactory.createRemoteDataSource().logout()
+    }
 }

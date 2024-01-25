@@ -1,5 +1,6 @@
 package br.com.raulreis.instaapp.main.view
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,8 +15,10 @@ import br.com.raulreis.instaapp.post.view.AddFragment
 import br.com.raulreis.instaapp.common.extension.replaceFragment
 import br.com.raulreis.instaapp.databinding.ActivityMainBinding
 import br.com.raulreis.instaapp.home.view.HomeFragment
+import br.com.raulreis.instaapp.main.LogoutListener
 import br.com.raulreis.instaapp.profile.view.ProfileFragment
 import br.com.raulreis.instaapp.search.view.SearchFragment
+import br.com.raulreis.instaapp.splash.view.SplashActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -23,7 +26,8 @@ class MainActivity :
     AppCompatActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener,
     AddFragment.AddListener,
-    SearchFragment.SearchListener {
+    SearchFragment.SearchListener,
+    LogoutListener {
 
     private lateinit var binding : ActivityMainBinding
 
@@ -134,5 +138,19 @@ class MainActivity :
             addToBackStack(null)
             commit()
         }
+    }
+
+    override fun logout() {
+
+        if (supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null)
+            profileFragment.presenter.clear()
+
+        homeFragment.presenter.clear()
+        homeFragment.presenter.logout()
+
+        val intent = Intent(baseContext, SplashActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 }

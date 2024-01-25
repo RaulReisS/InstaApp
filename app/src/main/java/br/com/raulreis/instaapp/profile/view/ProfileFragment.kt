@@ -1,5 +1,6 @@
 package br.com.raulreis.instaapp.profile.view
 
+import android.content.Context
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -11,6 +12,7 @@ import br.com.raulreis.instaapp.common.base.DependencyInjector
 import br.com.raulreis.instaapp.common.model.Post
 import br.com.raulreis.instaapp.common.model.User
 import br.com.raulreis.instaapp.databinding.FragmentProfileBinding
+import br.com.raulreis.instaapp.main.LogoutListener
 import br.com.raulreis.instaapp.profile.Profile
 import br.com.raulreis.instaapp.profile.presentation.ProfilePresenter
 import com.bumptech.glide.Glide
@@ -25,6 +27,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
 
     private val adapter = PostAdapter()
     private var uuid : String? = null
+
+    private var logoutListener: LogoutListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is LogoutListener)
+            logoutListener = context
+    }
 
     override fun setupPresenter() {
         val repository = DependencyInjector.profileRepository()
@@ -117,6 +127,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
             }
         }
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menuLogout -> {
+                logoutListener?.logout()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

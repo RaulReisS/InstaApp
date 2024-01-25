@@ -7,6 +7,8 @@ interface HomeDataSource {
 
     fun fetchFeed(userUUID: String, callback: RequestCallback<List<Post>>)
 
+    fun logout() { throw UnsupportedOperationException() }
+
     fun fetchSession() : String { throw UnsupportedOperationException() }
 
     fun putFeed(response:List<Post>?) { throw UnsupportedOperationException() }

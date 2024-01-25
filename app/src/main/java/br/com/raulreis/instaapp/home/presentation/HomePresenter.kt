@@ -36,6 +36,10 @@ class HomePresenter(
         view = null
     }
 
+    override fun logout() {
+        repository.logout()
+    }
+
     override fun clear() {
         repository.clearCache()
     }
