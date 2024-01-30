@@ -29,11 +29,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     private var uuid : String? = null
 
     private var logoutListener: LogoutListener? = null
+    private var followListener: FollowListener? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is LogoutListener)
             logoutListener = context
+        if (context is FollowListener)
+            followListener = context
     }
 
     override fun setupPresenter() {
@@ -137,6 +140,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun followUpdated() {
+        followListener?.followUpdated()
+    }
+
+    interface FollowListener {
+        fun followUpdated()
     }
 
     companion object {

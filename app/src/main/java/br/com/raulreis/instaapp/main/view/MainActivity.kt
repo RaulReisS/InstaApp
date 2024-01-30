@@ -27,6 +27,7 @@ class MainActivity :
     BottomNavigationView.OnNavigationItemSelectedListener,
     AddFragment.AddListener,
     SearchFragment.SearchListener,
+    ProfileFragment.FollowListener,
     LogoutListener {
 
     private lateinit var binding : ActivityMainBinding
@@ -152,5 +153,13 @@ class MainActivity :
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
+
+    override fun followUpdated() {
+        homeFragment.presenter.clear()
+
+        if (supportFragmentManager.findFragmentByTag(profileFragment.javaClass.simpleName) != null) {
+            profileFragment.presenter.clear()
+        }
     }
 }
