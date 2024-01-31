@@ -1,6 +1,8 @@
 package br.com.raulreis.instaapp.register.view
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
@@ -11,6 +13,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import br.com.raulreis.instaapp.R
@@ -97,7 +101,13 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo), Regist
         customDialog.addButton(R.string.photo, R.string.gallery) {
             when(it.id) {
                 R.string.photo -> {
-                    fragmentAttachListener?.goToCameraScreen()
+                    if (allPermissionsGranted()) {
+                        fragmentAttachListener?.goToCameraScreen()
+                    }
+                    else {
+                        getPermission.launch(REQUIRED_PERMISSION)
+                    }
+
                 }
                 R.string.gallery -> {
                     fragmentAttachListener?.goToGallery()
@@ -106,6 +116,18 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo), Regist
         }
         customDialog.show()
     }
+
+    private val getPermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { granted ->
+        if (allPermissionsGranted()) {
+            fragmentAttachListener?.goToCameraScreen()
+        }
+        else {
+            Toast.makeText(requireContext(), R.string.permission_camera_denied, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun allPermissionsGranted() =
+        ContextCompat.checkSelfPermission(requireContext(), REQUIRED_PERMISSION[0]) == PackageManager.PERMISSION_GRANTED
 
     private fun onCropImageresult(uri: Uri?) {
         if( uri != null) {
@@ -121,6 +143,10 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo), Regist
 
             presenter.updateUser(uri)
         }
+    }
+
+    companion object {
+        private val REQUIRED_PERMISSION = arrayOf(Manifest.permission.CAMERA)
     }
 
 }
