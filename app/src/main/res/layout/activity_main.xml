@@ -15,7 +15,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarMain"
         android:layout_width="match_parent"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="?colorOnPrimary"
         android:layout_height="wrap_content" >
 
         <androidx.appcompat.widget.Toolbar
@@ -25,6 +25,7 @@
             android:layout_height="?attr/actionBarSize">
 
             <ImageView
+                android:id="@+id/imgMainLogo"
                 android:src="@drawable/instaapp_logo_black"
                 android:layout_width="100dp"
                 android:layout_marginTop="8dp"
@@ -40,6 +41,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?colorOnPrimary"
         app:layout_constraintBottom_toTopOf="@id/bottomnavMain"
 
         />
@@ -53,7 +55,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/menu_bottom_nav"
-        app:itemIconTint="@color/black"
+        app:itemIconTint="?colorPrimary"
+        android:backgroundTint="?colorOnPrimary"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/bottomnavMain" />

@@ -1,6 +1,9 @@
 package br.com.raulreis.instaapp.register.view
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -28,6 +31,15 @@ class RegisterEmailFragment : Fragment(R.layout.fragment_register_email), Regist
 
         binding?.let {
             with(it) {
+
+                when(resources.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+                    Configuration.UI_MODE_NIGHT_YES -> {
+                        imgRegisterPlaceholder.imageTintList = ColorStateList.valueOf(Color.WHITE)
+                    }
+                    Configuration.UI_MODE_NIGHT_NO -> {
+                    }
+                }
+
                 txvRegisterLogin.setOnClickListener {
                     activity?.finish()
                 }

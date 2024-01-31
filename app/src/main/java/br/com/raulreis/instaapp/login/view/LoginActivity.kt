@@ -1,6 +1,9 @@
 package br.com.raulreis.instaapp.login.view
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.content.res.Configuration
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -27,6 +30,15 @@ class LoginActivity : AppCompatActivity(), Login.View {
         presenter = LoginPresenter(this, DependencyInjector.loginRepository())
 
         with(binding) {
+            when(resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+                Configuration.UI_MODE_NIGHT_YES -> {
+                    imgLoginLogo.imageTintList = ColorStateList.valueOf(Color.WHITE)
+                }
+                Configuration.UI_MODE_NIGHT_NO -> {
+                }
+
+            }
+
             edtLoginEmail.addTextChangedListener(watcher)
             edtLoginEmail.addTextChangedListener(TxtWatcher {
                 displayEmailFailure(null)

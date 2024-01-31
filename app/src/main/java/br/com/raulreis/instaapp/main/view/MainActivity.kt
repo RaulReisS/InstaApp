@@ -1,6 +1,9 @@
 package br.com.raulreis.instaapp.main.view
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -49,11 +52,20 @@ class MainActivity :
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.statusBarColor = ContextCompat.getColor(this, R.color.gray)
-            window.insetsController?.setSystemBarsAppearance(
-                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-            )
+            when(resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+                Configuration.UI_MODE_NIGHT_YES -> {
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.black)
+                    binding.imgMainLogo.imageTintList = ColorStateList.valueOf(Color.WHITE)
+                }
+                Configuration.UI_MODE_NIGHT_NO -> {
+                    window.insetsController?.setSystemBarsAppearance(
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                    )
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.gray)
+                }
+
+            }
         }
 
         setSupportActionBar(binding.toolbarMain)

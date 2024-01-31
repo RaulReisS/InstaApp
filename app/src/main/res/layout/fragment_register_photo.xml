@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
+    android:background="?colorOnPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -35,13 +35,13 @@
             <TextView
                 android:text="@string/photo_register_title"
                 android:textSize="24sp"
-                android:textColor="@color/black"
+                android:textColor="?colorPrimary"
                 android:layout_gravity="center_horizontal"
                 style="@style/Theme.InstaApp.TextViewBase.Form" />
 
             <TextView
                 android:text="@string/photo_register_subtitle"
-                android:textColor="@color/black"
+                android:textColor="?colorPrimary"
                 android:layout_gravity="center_horizontal"
                 style="@style/Theme.InstaApp.TextViewBase.Form" />
 

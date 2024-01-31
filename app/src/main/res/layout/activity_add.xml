@@ -13,6 +13,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAdd"
+            android:backgroundTint="?colorOnPrimary"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 

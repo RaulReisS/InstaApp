@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
+    android:background="?colorOnPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,6 +24,7 @@
             android:background="@color/white">
 
             <ImageView
+                android:id="@+id/imgRegisterPlaceholder"
                 android:layout_marginBottom="48dp"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
@@ -64,8 +65,8 @@
     <TextView
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:textColor="@color/black"
-        android:background="@color/white"
+        android:textColor="?colorPrimary"
+        android:background="?colorOnPrimary"
         android:text="@string/already_has_account"
         android:id="@+id/txvRegisterLogin"
         app:layout_constraintStart_toStartOf="parent"
